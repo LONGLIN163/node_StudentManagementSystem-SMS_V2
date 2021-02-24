@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>add page</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME ICONS  -->
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="/css/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- HEADER END-->
+    <div class="navbar navbar-inverse set-radius-zero">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <h1>SMS</h1>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/">All Students</a>
+                            </li>
+                            <li>
+                                <a class="menu-top-active" href="/">Add Student</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-head-line">Add Student</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <p>sid:</p>
+                </div>
+                <div class="col-md-5">
+                    <p>
+                        <input type="text" class="form-control">
+                    </p>
+                    <div class="alert alert-danger" role="alert" name="sid" id="tip" style="display: none;">
+                        sid exist! please try another one.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <p>name:</p>
+                </div>
+                <div class="col-md-5">
+                    <p>
+                        <input type="text" class="form-control" name="name">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <p>age:</p>
+                </div>
+                <div class="col-md-5">
+                    <p>
+                        <input type="text" class="form-control" name="age">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <p>gender:</p>
+                </div>
+                <div class="col-md-5">
+                    <p>
+                        <label><input type="radio"  value="male" name="sex">Male</label>
+                        <label><input type="radio"  value="female" name="sex">Female</label>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 text-right">
+
+                </div>
+                <div class="col-md-5">
+                    <p>
+                        <button type="button" class="btn btn-success">Submit</button>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
