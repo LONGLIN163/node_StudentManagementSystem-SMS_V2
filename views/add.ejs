@@ -121,8 +121,9 @@
 
     <script src="/js/jquery.min.js"></script>
     <script>
+        // add student when click submit
         $("#btn").click(function(){
-            $.post( "/add", {
+            $.post( "/student", {
                 sid:  parseInt($("input[name=sid]").val()),
                 name: $("input[name=name]").val(),
                 age: parseInt($("input[name=age]").val()),
@@ -143,7 +144,7 @@
                }
            });
         })
-
+        // check sid when mouse move out of sid field
         $("input[name=sid]").blur(function(){
             var sid=parseInt($("input[name=sid]").val());
             if(isNaN(sid) || !sid || !(sid>100000 && sid<999999)){
@@ -153,7 +154,7 @@
 
             $.ajax({
                 type:"propfind",
-                url:"/"+$("input[name=sid]").val(),
+                url:"/student/"+$("input[name=sid]").val(),
                 success:function(data){
                     console.log("data",data)
                     if(!data.result){//if data.result is true, sid doest exist,else exist.

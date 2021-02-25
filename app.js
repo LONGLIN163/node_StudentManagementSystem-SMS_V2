@@ -13,14 +13,14 @@ app.set("view engine" , "ejs");
 // create restful routers
 app.get('/', mainCtrl.showIndex);
 app.get('/add', mainCtrl.showAdd); // show form page
-app.propfind('/:sid', mainCtrl.check); // Ajax check if the studentID is in used,if used, no need to continue. 
-app.post('/add', mainCtrl.doAdd); // Ajax save form data
-app.post('/:sid', mainCtrl.updateStudent); // Ajax save form data
-app.delete('/:sid', mainCtrl.deleteStudent); // Ajax save form data
 
+app.propfind('/student/:sid', mainCtrl.check); // Ajax check if the studentID is in used,if used, no need to continue. 
+app.post('/student/:sid', mainCtrl.updateStudent); // Ajax save form data
+app.delete('/student/:sid', mainCtrl.deleteStudent); // Ajax save form data
 
+app.post('/student', mainCtrl.doAddStudent); // Ajax save form data
+app.get('/students', mainCtrl.getAllStudents); // Ajax get all student
 
-
-app.use(express.static("public"))
+app.use(express.static("public"))  
 app.listen(3000)
 console.log("hahaha")

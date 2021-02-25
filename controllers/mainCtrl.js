@@ -5,6 +5,14 @@ exports.showIndex=function(req,res){
     res.render("index");
 }
 
+exports.getAllStudents=function(req,res){
+    //Student.findAllStudents();
+    //use native method to find
+    Student.find({},function(err,results){
+        res.json({"results":results});
+    })
+}
+
 exports.showAdd=function(req,res){
     res.render("add");
 }
@@ -20,7 +28,7 @@ exports.deleteStudent=function(req,res){
 //check if username is in used
 exports.check=function(req,res){
     var sid=req.params.sid;
-    console.log("this is check(),someone send /:sid propfind request.");
+    console.log("this is check(),someone send /student/:sid propfind request.");
     
     Student.checkSid(sid,function(result){
         // sent response to console, if true, this sid is not in use.
@@ -29,7 +37,7 @@ exports.check=function(req,res){
 }
 
 // add student to database
-exports.doAdd=function(req,res){
+exports.doAddStudent=function(req,res){
     console.log("Somebody is sending a post request here!!!")
     var form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {

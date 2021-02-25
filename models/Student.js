@@ -25,7 +25,7 @@ studentSchema.statics.addStudent = function(json,callback){
     Student.checkSid(json.sid,function(result){
       if(result==true){
         var s=new Student(json);
-        s.save(function(){
+        s.save(function(err){
           if (err) {
             callback(-2);// Wo cao, server bug.
             return;
@@ -48,6 +48,7 @@ studentSchema.statics.checkSid = function(sid,callback){
     callback(bl);
   })
 }
+
 
 var Student = mongoose.model('Student', studentSchema);
 
