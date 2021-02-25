@@ -9,6 +9,26 @@ exports.showAdd=function(req,res){
     res.render("add");
 }
 
+exports.updateStudent=function(req,res){
+    res.render("add");
+}
+
+exports.deleteStudent=function(req,res){
+    res.render("add");
+}
+
+//check if username is in used
+exports.check=function(req,res){
+    var sid=req.params.sid;
+    console.log("this is check(),someone send /:sid propfind request.");
+    
+    Student.checkSid(sid,function(result){
+        // sent response to console, if true, this sid is not in use.
+        res.json({"result":result});
+    })
+}
+
+// add student to database
 exports.doAdd=function(req,res){
     console.log("Somebody is sending a post request here!!!")
     var form = new formidable.IncomingForm();
@@ -26,8 +46,6 @@ exports.doAdd=function(req,res){
             }
         });
       });
-
-
 
     /*
     //unit test

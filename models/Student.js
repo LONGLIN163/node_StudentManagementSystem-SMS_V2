@@ -23,10 +23,16 @@ studentSchema.statics.addStudent = function(json,callback){
 
     // Validate if sid is exist when add a student.
     Student.checkSid(json.sid,function(result){
-      if(result==false){
+      if(result==true){
         var s=new Student(json);
-        s.save();
-        callback(1);// Sid is not being used, send back 1.
+        s.save(function(){
+          if (err) {
+            callback(-2);// Wo cao, server bug.
+            return;
+          } 
+          callback(1);// Sid is not being used, send back 1.
+        });
+
       }else{
         callback(-1); // Sid is being used, send back -1.
       }
@@ -36,7 +42,10 @@ studentSchema.statics.addStudent = function(json,callback){
 // The method that validates if sid is exist.
 studentSchema.statics.checkSid = function(sid,callback){
   this.find({"sid":sid},function(err,results){
-    callback(results!=0);
+    console.log("checkSid---results",results)
+    var bl=(results.length==0);
+    console.log("bl1",bl)//if true, no this sid in db.u can add it into db.
+    callback(bl);
   })
 }
 
