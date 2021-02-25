@@ -89,6 +89,18 @@
             </div>
         </div>
     </div>
+    <script>
+        $.get("/students",function(data){
+           $.each(data.results,function(i,n){
+              //console.log(i)
+              //console.log(n)
+              $("<li></li>").html(n.sid).appendTo("#tbody")
+              $("<li></li>").html(n.name).appendTo("#tbody")
+              $("<li></li>").html(n.age).appendTo("#tbody")
+              $("<li></li>").html(n.gender).appendTo("#tbody")
+           })
+        })
+    </script>
 
 </body>
 </html>
