@@ -67,9 +67,9 @@
                 </div>
                 <div class="col-md-5">
                     <p>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="sid">
                     </p>
-                    <div class="alert alert-danger" role="alert" name="sid" id="tip" style="display: none;">
+                    <div class="alert alert-danger" role="alert" id="tip" style="display: none;">
                         sid exist! please try another one.
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                 </div>
                 <div class="col-md-5">
                     <p>
-                        <label><input type="radio"  value="male" name="sex">Male</label>
-                        <label><input type="radio"  value="female" name="sex">Female</label>
+                        <label><input type="radio"  value="male" name="gender">Male</label>
+                        <label><input type="radio"  value="female" name="gender">Female</label>
                     </p>
                 </div>
             </div>
@@ -111,13 +111,27 @@
                 </div>
                 <div class="col-md-5">
                     <p>
-                        <button type="button" class="btn btn-success">Submit</button>
+                        <button id="btn" type="button" class="btn btn-success">Submit</button>
                     </p>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <script src="/js/jquery.min.js"></script>
+    <script>
+        $("#btn").click(function(){
+            $.post( "/add", {
+                sid:  $("input[name=sid]").val(),
+                name: $("input[name=name]").val(),
+                age: $("input[name=age]").val(),
+                gender: $("input[name=gender]:checked").val()
+            }, function( ) {
+               console.log("add")
+           });
+        })
+    </script>
 
 </body>
 </html>
