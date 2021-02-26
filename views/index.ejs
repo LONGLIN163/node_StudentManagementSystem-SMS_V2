@@ -99,21 +99,21 @@
                 boxid:"pagenavbox",
                 page:1,
                 pageAmount:data.pageAmount,
-                change:function(pageNum){
-                    gotoPage(pageNum);
+                change:function(pagenumber){
+                    gotoPage(pagenumber);
                 }
             })
-            gotoPage(2);
+            gotoPage(1);
         })
 
-        function gotoPage(pageNum){
-            
-            $.get("/students?page="+pageNum,function(data){
+        function gotoPage(pagenumber){ 
+            $("#tbody").empty();// empty last dom
+            // new data, go to dom
+            $.get("/students?page="+pagenumber,function(data){
                $.each(data.results,function(i,n){
                   //console.log(i)
                   //console.log(n)
-                  $("#tbody").empty();// empty last dom
-                  // new data, go to dom
+                  
                   $tr=$("<tr></tr>");
                   $("<td></td>").html(n.sid).appendTo($tr);
                   $("<td></td>").html(n.name).appendTo($tr);

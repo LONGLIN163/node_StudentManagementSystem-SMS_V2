@@ -5,9 +5,8 @@
         this.page = params.page || 1;
         this.pageAmount = params.pageAmount;
         this.flag = false;
-        this.callback=params.callback;
  
-        //get event delegate functions
+        //get delegate functions；
         this.fn = params.change;
         this.init();
         this.gotoPage(this.page);
@@ -27,13 +26,15 @@
         this.$nextBtn = $("<a href='javascript:;'></a>").addClass("cBtn").html("下一页").appendTo(this.$box);
    };
    PageNav.prototype.gotoPage = function(number){
+        
          if(number >= 1 && number <= this.pageAmount){
             this.page = number;
         };
         if(this.pageAmount <= 7){
+            
             this.$ellipsis1.hide();
             this.$ellipsis2.hide();
-
+            //hide and show for last or next
             if(this.page == 1){
                 this.$prevBtn.hide();
                 this.$nextBtn.show();
@@ -44,7 +45,7 @@
                 this.$prevBtn.show();
                 this.$nextBtn.show();
             };
-
+           
             this.$box.find(".Btn:lt("+this.pageAmount+")").show();
             this.$box.find(".Btn:gt("+(this.pageAmount - 1)+")").hide();
             this.$btn1.html(1).attr("data-number",1);
@@ -54,13 +55,13 @@
             this.$btn5.html(5).attr("data-number",5);
             this.$btn6.html(6).attr("data-number",6);
             this.$btn7.html(7).attr("data-number",7);
-
+            //current page cur；
             this.$box.find(".Btn").eq(this.page-1).addClass("cur").siblings(".Btn").removeClass('cur');
         }else if( this.page < 5 ){
-
+            
              this.$ellipsis1.hide();
              this.$ellipsis2.show();
- 
+            
              this.$btn1.show().html(1).attr("data-number",1);
              this.$btn2.show().html(2).attr("data-number",2);
              this.$btn3.show().html(3).attr("data-number",3);
@@ -68,9 +69,9 @@
              this.$btn5.show().html(5).attr("data-number",5);
              this.$btn6.show().html(6).attr("data-number",6);
              this.$btn7.show().html(this.pageAmount).attr("data-number",this.pageAmount);
-      
+             
              this.$box.find(".Btn").eq(this.page-1).addClass("cur").siblings(".Btn").removeClass('cur');;
-
+            
              if( this.page == 1){
                 this.$prevBtn.hide();
                 this.$nextBtn.show();
@@ -79,7 +80,6 @@
                 this.$nextBtn.show();
              };
         }else if( this.page <= this.pageAmount - 4 ){
-
              this.$ellipsis1.show();
              this.$ellipsis2.show();
 
@@ -99,7 +99,7 @@
 
              this.$ellipsis1.show();
              this.$ellipsis2.hide();
-
+            
              this.$btn1.show().html(1).attr("data-number",1);
              this.$btn2.hide();
              this.$btn3.html(this.pageAmount-4).attr("data-number",this.pageAmount-4);
@@ -107,9 +107,9 @@
              this.$btn5.html(this.pageAmount-2).attr("data-number",this.pageAmount-2);
              this.$btn6.html(this.pageAmount-1).attr("data-number",this.pageAmount-1);
              this.$btn7.html(this.pageAmount).attr("data-number",this.pageAmount);
-
+             
              this.$box.find(".Btn").eq(this.page-this.pageAmount-1).addClass('cur').siblings(".Btn").removeClass('cur');;
-
+             
              if(this.page == this.pageAmount){
                 this.$prevBtn.show();
                 this.$nextBtn.hide();
@@ -118,7 +118,7 @@
                 this.$nextBtn.show();
              }
         };
-        //excute delegate functions
+        //after request ,set this.flag=true, excute delegete function
         if(this.flag){
             this.fn(this.page);
         };
