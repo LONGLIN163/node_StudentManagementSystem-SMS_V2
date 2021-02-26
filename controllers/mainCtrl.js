@@ -24,7 +24,7 @@ exports.showUpdate=function(req,res){
     //use native method to find this student
     Student.find({"sid":sid},function(err,results){
         //res.json({"results":results});
-        console.log("showUpdate results:",results)
+        //console.log("showUpdate results:",results)
         if(results.length==0){
            res.send("no this person, please check address.");
            return; 
@@ -38,7 +38,39 @@ exports.showUpdate=function(req,res){
     //res.render("modify");
 }
 exports.updateStudent=function(req,res){
-    res.render("add");
+    //console.log("updateStudent here")
+    var sid=req.params.sid;
+    if(!sid){
+        return;
+    }
+    //receive post data
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        Student.find({"sid":sid},function(err,results){
+            //res.json({"results":results});
+            //console.log("showUpdate results:",results)
+            if(results.length==0){
+              res.json({"result":-1});
+            return; 
+            }
+            var currentStudent=results[0];
+            //console.log("currentStudent",currentStudent)
+            currentStudent.name=fields.name;
+            currentStudent.age=fields.age;
+            currentStudent.gender=fields.gender;
+            currentStudent.save(function(err){
+                if (err) {
+                    res.json({"result":-1});
+                  return;
+                } 
+                res.json({"result":1});
+
+            });
+
+
+
+       })
+    })
 }
 
 exports.deleteStudent=function(req,res){

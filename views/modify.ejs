@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-5">
                     <p>
-                        <input type="text" class="form-control" name="sid" value="<%= info.sid %>">
+                        <input type="text" class="form-control" name="sid" disabled value="<%= info.sid %>">
                     </p>
                     <div class="alert alert-danger" role="alert" id="sid_tip" style="display: none;">
                         sid exist! please try another one.
@@ -124,55 +124,24 @@
 
     <script src="/js/jquery.min.js"></script>
     <script>
-        // // add student when click submit
-        // $("#btn").click(function(){
-        //     $.post( "/student", {
-        //         sid:  parseInt($("input[name=sid]").val()),
-        //         name: $("input[name=name]").val(),
-        //         age: parseInt($("input[name=age]").val()),
-        //         gender: $("input[name=gender]:checked").val()
-        //     }, function(data) {
-        //        console.log("add post",data)
-        //        if(data.result==1){
-        //            alert("add student success!")
-        //            $("input[type=text]").val("");
-        //        }else if(data.result==-1){
-        //         alert("add student failed, sid exist!")
-        //            //$("input[type=text]").val("");
-        //        }else if(data.result==-2){
-        //         alert("add student failed, save bug!")
-        //            //$("input[type=text]").val("");
-        //        }else{
-        //         alert("something weard happened!")
-        //        }
-        //    });
-        // })
-        // // check sid when mouse move out of sid field
-        // $("input[name=sid]").blur(function(){
-        //     var sid=parseInt($("input[name=sid]").val());
-        //     if(isNaN(sid) || !sid || !(sid>100000 && sid<999999)){
-        //         $("#sid_tip").removeClass("alert-success").addClass("alert-danger").html("illegal sid, please input a llegal 6 digit sid!").show();
-        //         return;//dont do anything if there is nothing coming from this form, or it is not sid
-        //     }
-
-        //     $.ajax({
-        //         type:"propfind",
-        //         url:"/student/"+$("input[name=sid]").val(),
-        //         success:function(data){
-        //             console.log("data",data)
-        //             if(!data.result){//if data.result is true, sid doest exist,else exist.
-        //                 $("#sid_tip").removeClass("alert-success").addClass("alert-danger").html("this isd is in used, please input another 6 digit sid!").show();
-        //                 return;
-        //             }else{
-        //                 $("#sid_tip").removeClass("alert-danger").addClass("alert-success").html("Congrat!").show();
-        //             }
-
-        //         }
-        //     })
-        // });
-        // $("input[name=sid]").focus(function(){
-        //     $("#sid_tip").hide();
-        // });
+        // add student when click submit
+        $("#btn").click(function(){
+            var sid=parseInt($("input[name=sid]").val())
+            $.post( "/student/"+sid, {
+                name: $("input[name=name]").val(),
+                age: parseInt($("input[name=age]").val()),
+                gender: $("input[name=gender]:checked").val()
+            }, function(data) {
+               console.log("add post",data)
+               if(data.result==1){
+                   alert("modify student success!")
+                   window.location="/";// if success, nav to home
+               }else{
+                alert("something weard happened!")
+               }
+           });
+        })
+        
 
     </script>
 
