@@ -18,9 +18,7 @@ exports.showAdd=function(req,res){
 }
 
 exports.showUpdate=function(req,res){
-    
     var sid=req.params.sid;
-
     //use native method to find this student
     Student.find({"sid":sid},function(err,results){
         //res.json({"results":results});
@@ -49,7 +47,7 @@ exports.updateStudent=function(req,res){
         Student.find({"sid":sid},function(err,results){
             //res.json({"results":results});
             //console.log("showUpdate results:",results)
-            if(results.length==0){
+            if( err || results.length==0){
               res.json({"result":-1});
             return; 
             }
@@ -66,17 +64,33 @@ exports.updateStudent=function(req,res){
                 res.json({"result":1});
 
             });
-
-
-
        })
     })
 }
 
 exports.deleteStudent=function(req,res){
-    res.render("add");
-}
+    //console.log("delete student here!");
+    var sid=req.params.sid;
+    //use native method to find this student
+    Student.find({"sid":sid},function(err,results){
+        //res.json({"results":results});
+        //console.log("showUpdate results:",results)
+        if(err || results.length==0){
+           res.send("no this person, please check address.");
+           return; 
+        }
+        var currentStudent=results[0];
+        currentStudent.remove(function(err){
+            if (err) {
+                res.json({"result":-1});
+              return;
+            } 
+            res.json({"result":1});
 
+        });
+    })
+}
+ 
 //check if username is in used
 exports.check=function(req,res){
     var sid=req.params.sid;

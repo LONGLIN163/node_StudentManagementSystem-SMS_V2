@@ -109,9 +109,31 @@
 
         // use delegate to bind event
         $( "#tbody" ).delegate( ".delbtn", "click", function() {
-            alert("delete!")
-        });
+            //alert("delete!")
+            if(!confirm("r r sure u wnanna delete this??? ")){
+               return;
+            }
+            var sid=$(this).attr("data-sid");
+            var $this=$(this);
+            $.ajax({
+                type:"delete",
+                url:"/student/"+sid, 
+                success:function(data){
+                    //console.log("delete data",data)
+                    if(data.result==1){
+                        alert("delete success!")
+                        //window.location="/";// if success, home refresh
+                        $this.parents("tr").remove();// dont refresh home
 
+                    }else{
+                        alert("some thing wrong")
+                    }
+                   
+                }
+            })
+
+        });
+        // use delegate to bind event
         $( "#tbody" ).delegate( ".modbtn", "click", function() {
             //alert("modify!")
             var sid=$(this).attr("data-sid");
