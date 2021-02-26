@@ -89,8 +89,45 @@
             </div>
         </div>
     </div>
+
+    <script src="js/PageNav.js"></script>
     <script>
+        //Pagination
+        $.get("/students?page=1",function(data){
+            console.log("pageAmount:"+data.pageAmount)
+            new PageNav({
+                boxid:"pagenavbox",
+                page:1,
+                pageAmount:data.pageAmount,
+                change:function(pageNum){
+                    gotoPage(pageNum);
+                }
+            })
+            gotoPage(2);
+        })
+
+        function gotoPage(pageNum){
+            
+            $.get("/students?page="+pageNum,function(data){
+               $.each(data.results,function(i,n){
+                  //console.log(i)
+                  //console.log(n)
+                  $("#tbody").empty();// empty last dom
+                  // new data, go to dom
+                  $tr=$("<tr></tr>");
+                  $("<td></td>").html(n.sid).appendTo($tr);
+                  $("<td></td>").html(n.name).appendTo($tr);
+                  $("<td></td>").html(n.age).appendTo($tr);
+                  $("<td></td>").html(n.gender).appendTo($tr);
+                  $("<td><input type='button' class='btn btn-danger delbtn' value='delete' data-sid='"+n.sid+"'><input type='button' class='btn btn-danger modbtn' value='update' data-sid='"+n.sid+"'></td>").appendTo($tr);
+    
+                  $tr.appendTo("#tbody")
+               })
+            })
+        }
+
         //get all student json data to dom
+        /*
         $.get("/students",function(data){
            $.each(data.results,function(i,n){
               //console.log(i)
@@ -105,7 +142,7 @@
 
               $tr.appendTo("#tbody")
            })
-        })
+        })*/
 
         // use delegate to bind event
         $( "#tbody" ).delegate( ".delbtn", "click", function() {

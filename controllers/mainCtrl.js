@@ -1,4 +1,5 @@
 var Student=require('../models/Student');
+var url=require("url")
 const formidable = require('formidable');
 
 exports.showIndex=function(req,res){
@@ -7,10 +8,23 @@ exports.showIndex=function(req,res){
 
 exports.getAllStudents=function(req,res){
     //Student.findAllStudents();
-    //use native method to find
-    Student.find({},function(err,results){
-        res.json({"results":results});
+    var page=url.parse(req.url,true).query.page -1 || 0;
+    var pageSize=2;//every page represent pageSize items data
+
+    //find all documents
+    Student.count({},function(err,count){
+        console.log("count:"+count);
+        //use native method to find
+        //*************mongoose can do paging***********
+        //http://127.0.0.1:3000/students?page=0
+        Student.find({}).limit(2).skip(pageSize*page).exec(function(err,results){//jump pageSize*page items,then read pageSize items
+            res.json({
+                "results":results,
+                "pageAmount":Math.ceil(count/pageSize)//get all pages
+                });
+            });
     })
+
 }
 
 exports.showAdd=function(req,res){
