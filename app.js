@@ -12,14 +12,19 @@ mongoose.Promise = global.Promise;
 app.set("view engine" , "ejs");
 // create restful routers
 app.get('/', mainCtrl.showIndex);
+app.get('/students', mainCtrl.getAllStudents); // Ajax get all student
+
 app.get('/add', mainCtrl.showAdd); // show form page
+app.post('/student', mainCtrl.doAddStudent); // Ajax save form data
 
 app.propfind('/student/:sid', mainCtrl.check); // Ajax check if the studentID is in used,if used, no need to continue. 
+
+app.get('/student/:sid', mainCtrl.showUpdate); // show modify student page
 app.post('/student/:sid', mainCtrl.updateStudent); // Ajax save form data
+
 app.delete('/student/:sid', mainCtrl.deleteStudent); // Ajax save form data
 
-app.post('/student', mainCtrl.doAddStudent); // Ajax save form data
-app.get('/students', mainCtrl.getAllStudents); // Ajax get all student
+
 
 app.use(express.static("public"))  
 app.listen(3000)

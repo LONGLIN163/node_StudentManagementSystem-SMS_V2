@@ -17,6 +17,26 @@ exports.showAdd=function(req,res){
     res.render("add");
 }
 
+exports.showUpdate=function(req,res){
+    
+    var sid=req.params.sid;
+
+    //use native method to find this student
+    Student.find({"sid":sid},function(err,results){
+        //res.json({"results":results});
+        console.log("showUpdate results:",results)
+        if(results.length==0){
+           res.send("no this person, please check address.");
+           return; 
+        }
+
+        res.render("modify",{
+            info:results[0]
+        });
+    })
+
+    //res.render("modify");
+}
 exports.updateStudent=function(req,res){
     res.render("add");
 }

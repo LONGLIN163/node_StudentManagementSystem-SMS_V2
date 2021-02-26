@@ -90,16 +90,35 @@
         </div>
     </div>
     <script>
+        //get all student json data to dom
         $.get("/students",function(data){
            $.each(data.results,function(i,n){
               //console.log(i)
               //console.log(n)
-              $("<li></li>").html(n.sid).appendTo("#tbody")
-              $("<li></li>").html(n.name).appendTo("#tbody")
-              $("<li></li>").html(n.age).appendTo("#tbody")
-              $("<li></li>").html(n.gender).appendTo("#tbody")
+
+              $tr=$("<tr></tr>");
+              $("<td></td>").html(n.sid).appendTo($tr);
+              $("<td></td>").html(n.name).appendTo($tr);
+              $("<td></td>").html(n.age).appendTo($tr);
+              $("<td></td>").html(n.gender).appendTo($tr);
+              $("<td><input type='button' class='btn btn-danger delbtn' value='delete' data-sid='"+n.sid+"'><input type='button' class='btn btn-danger modbtn' value='update' data-sid='"+n.sid+"'></td>").appendTo($tr);
+
+              $tr.appendTo("#tbody")
            })
         })
+
+        // use delegate to bind event
+        $( "#tbody" ).delegate( ".delbtn", "click", function() {
+            alert("delete!")
+        });
+
+        $( "#tbody" ).delegate( ".modbtn", "click", function() {
+            //alert("modify!")
+            var sid=$(this).attr("data-sid");
+            window.location="/student/"+sid;
+        });
+
+        
     </script>
 
 </body>
