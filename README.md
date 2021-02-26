@@ -1,8 +1,7 @@
 
 SMS_V2
 ===================================
-A small MVC project based mongo and node, through UI user can add, delete, modify data with robust validation in studentID(sid).  
-Tech stacks: mongoose , express, restful api/router, ejs, jquery, ajax, bootstrap .etc.
+A small MVC project based mongo and node, through UI user can add, delete, modify data with robust validation on studentID(sid),and integrate a pageing function. It covers mongoose , express, restful api/router, ejs, jquery, ajax, bootstrap .etc.
 
 ### Connect to database 
 
